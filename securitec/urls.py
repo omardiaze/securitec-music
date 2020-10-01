@@ -27,6 +27,7 @@ router.register(r'canciones', music_views.CancionViewSet)
 
 
 urlpatterns = [
+    path('', music_views.index.as_view()),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/login/', music_views.login.as_view()),

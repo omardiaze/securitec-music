@@ -6,6 +6,8 @@ from .serializers import *
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 class PaisViewSet(viewsets.ModelViewSet):
 	queryset = Pais.objects.all()
@@ -35,27 +37,12 @@ class login(ObtainAuthToken):
             'email': user.email
         })
 
-    # def post(self, request, *args, **kwargs):
-    #     if 'token' in request.data:
-    #         user, token = self.getInitialData(request, True)
-    #     else:
-    #         user, token = self.getInitialData(request)
-        
-    #     response = {
-    #         'id': user.id,
-    #         'username': user.username,
-    #         'email': user.email,
-	# 		'token': token.key
-    #     }
+class index(APIView):
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = [AllowAny]
+        return super(index, self).get_permissions()
 
-    # def getInitialData(self, request, token_request=False):
-    #     if token_request:
-    #         token_key = request.data['token']
-    #         token = Token.objects.get(key=token_key)
-    #         user = token.user
-    #     else:            
-    #         serializer = self.serializer_class(data=request.data,context={'request': request})
-    #         serializer.is_valid(raise_exception=True)
-    #         user = serializer.validated_data['user']
-    #         token, created = Token.objects.get_or_create(user=user)
-    #     return user, token
+    def get(self, request, *args, **kwargs):
+        response = {'api':'/api'}
+        return Response(data=response)
