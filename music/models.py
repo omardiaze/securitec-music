@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 class Pais(models.Model):
     nombre          = models.CharField(max_length=20, verbose_name='Nombre', unique=True)
@@ -39,7 +40,20 @@ class Album(models.Model):
 
     def artista_nombre(self):
         return self.artista.nombre if self.artista else ''
-
+    
+    def numero_canciones(self):
+        return Cancion.objects.filter(album_id=self).count()
+    
+    def duracion(self):
+        sum = datetime.timedelta()
+        canciones = Cancion.objects.filter(album_id=self).values('duracion')        
+        if canciones:
+            for item in canciones:
+                (h, m, s) = str(item['duracion']).split(':')
+                d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+                sum += d
+        return str(sum)
+        
     class Meta:
         verbose_name = "Álbum"
         verbose_name_plural = "Álbumes"
