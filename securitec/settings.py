@@ -30,7 +30,7 @@ SECRET_KEY = 'k1us)zs^_kk5f-re%)gtl&_108!vh4v&el&fv6fu2ud2^%oler'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'omardiaze.pythonanywhere.com']
 
 
 # Application definition
