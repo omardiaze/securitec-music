@@ -9,14 +9,14 @@ class PaisSerializer(serializers.ModelSerializer):
 class ArtistaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artista
-        fields = ['nombre', 'acerca', 'nacionalidad', 'nacionalidad_nombre']
+        fields = ['id', 'nombre', 'acerca', 'nacionalidad', 'nacionalidad_nombre']
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = ['nombre', 'portada', 'descripcion', 'anio', 'artista', 'artista_nombre', 'numero_canciones', 'duracion']
+        fields = ['id', 'nombre', 'portada', 'descripcion', 'anio', 'artista', 'artista_nombre', 'numero_canciones', 'duracion']
 
 class CancionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cancion
-        fields = ['nombre', 'duracion', 'album', 'album_nombre']
+        fields = ['id', 'nombre', 'duracion', 'album', 'album_nombre']
